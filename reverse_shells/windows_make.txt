@@ -20,6 +20,7 @@ WAIT_FOR_BUTTON_PRESS
 REM Move things around
 STRINGLN mv ./t.exe /tmp/ducky/windows.exe
 STRINGLN cd /tmp/ducky/
+STRINGLN rm -rf flipping_duckling/
 
 REM Start serving
 STRINGLN echo $LOCAL_IP
