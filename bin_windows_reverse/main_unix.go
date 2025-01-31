@@ -13,15 +13,15 @@ import (
 
 // Main function for CLI required to initialize the windows payload
 func main() {
-	shellcode := flag.String("s", "", "the shellcode to include")
+	shellcode := os.Args[1]
 
 	flag.Parse()
 
-	if *shellcode == "" {
+	if shellcode == "" {
 		log.Fatal("No shellcode was passed; go run . [SHELLCODE]")
 	}
 
-	buf := []byte(*shellcode)
+	buf := []byte(shellcode)
 	encrypted, key, err := encryptShellcode(buf)
 	if err != nil {
 		log.Fatalf("Failed to encrypt shellcode: %v", err)

