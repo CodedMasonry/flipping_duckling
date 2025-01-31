@@ -3,13 +3,6 @@
 # Exit the script if any command fails
 set -e
 
-# Clone the repository
-echo "Cloning repository..."
-git clone https://github.com/CodedMasonry/flipping_duckling.git
-
-# Navigate into the project directory
-cd flipping_duckling/
-
 # Install garble for obfuscation
 echo "Installing garble..."
 go install mvdan.cc/garble@latest
